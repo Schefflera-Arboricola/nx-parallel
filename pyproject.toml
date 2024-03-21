@@ -21,8 +21,8 @@ dependencies = [
 ]
 dynamic = ["version"]
 
-[tool.hatch.version]
-path = "nx_parallel/__init__.py"
+[tool.hatch.build.targets.wheel]
+packages = ["_nx_parallel", "nx_parallel",]
 
 [project.optional-dependencies]
 developer = [
