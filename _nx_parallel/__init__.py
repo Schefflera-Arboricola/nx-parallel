@@ -32,8 +32,8 @@ def get_funcs_info():
                     par_docs, par_params = extract_from_docs(d[func])
                     funcs[func] = {
                         "url": get_url(path, func),
-                        "additional_docs": par_docs,
-                        "additional_parameters": par_params,
+                        "extra_docstring": par_docs,
+                        "extra_parameters": par_params,
                     }
     return funcs
 
