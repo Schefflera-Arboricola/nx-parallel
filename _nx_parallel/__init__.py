@@ -1,9 +1,8 @@
-import os
-import ast
-
-
 def get_info():
     """Return a dictionary with information about the package."""
+    import os
+    import ast
+
     def get_funcs_info():
         """Return a dictionary with information about all the functions."""
         funcs = {}
