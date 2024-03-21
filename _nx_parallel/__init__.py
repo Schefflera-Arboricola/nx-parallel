@@ -10,7 +10,66 @@ def get_info():
         "package": "nx_parallel",
         "url": "https://github.com/networkx/nx-parallel",
         "short_summary": "Parallel backend for NetworkX algorithms",
-        "functions": get_funcs_info(),
+        "functions": {
+            "number_of_isolates": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/isolate.py#L8",
+                "additional_docs": "The parallel computation is implemented by dividing the list\nof isolated nodes into chunks and then finding the length of each chunk in parallel\nand then adding all the lengths at the end.",
+                "additional_parameters": None,
+            },
+            "square_clustering": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/cluster.py#L10",
+                "additional_docs": "The nodes are chunked into `node_chunks` and then the square clustering\ncoefficient for all `node_chunks` are computed in parallel over all available\nCPU cores.",
+                "additional_parameters": {
+                    'get_chunks : str, function (default = "chunks")': "A function that takes in a list of all the nodes (or nbunch) as input and\nreturns an iterable `node_chunks`. The default chunking is done by slicing the\n`nodes` into `n` chunks, where `n` is the number of CPU cores."
+                },
+            },
+            "local_efficiency": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/efficiency_measures.py#L9",
+                "additional_docs": "The parallel computation is implemented by dividing the\nnodes into chunks and then computing and adding global efficiencies of all node\nin all chunks, in parallel, and then adding all these sums and dividing by the\ntotal number of nodes at the end.",
+                "additional_parameters": None,
+            },
+            "closeness_vitality": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/vitality.py#L9",
+                "additional_docs": "The parallel computation is implemented only when the node\nis not specified. The closeness vitality for each node is computed concurrently.",
+                "additional_parameters": None,
+            },
+            "is_reachable": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/tournament.py#L10",
+                "additional_docs": "The function parallelizes the calculation of two\nneighborhoods of vertices in `G` and checks closure conditions for each\nneighborhood subset in parallel.",
+                "additional_parameters": None,
+            },
+            "tournament_is_strongly_connected": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/tournament.py#L54",
+                "additional_docs": "The parallel computation is implemented by dividing the\nnodes into chunks and then checking whether each node is reachable from each\nother node in parallel.",
+                "additional_parameters": None,
+            },
+            "betweenness_centrality": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/centrality/betweenness.py#L16",
+                "additional_docs": "The parallel computation is implemented by dividing the\nnodes into chunks and computing betweenness centrality for each chunk concurrently.",
+                "additional_parameters": None,
+            },
+            "node_redundancy": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/bipartite/redundancy.py#L11",
+                "additional_docs": "In the parallel implementation we divide the nodes into chunks and compute\nthe node redundancy coefficients for all `node_chunk` in parallel.",
+                "additional_parameters": {
+                    'get_chunks : str, function (default = "chunks")': "A function that takes in an iterable of all the nodes as input and returns\nan iterable `node_chunks`. The default chunking is done by slicing the\n`G.nodes` (or `nodes`) into `n` chunks, where `n` is the number of CPU cores."
+                },
+            },
+            "all_pairs_bellman_ford_path": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/shortest_paths/weighted.py#L16",
+                "additional_docs": "The parallel implementation first divides the nodes into chunks and then\ncreates a generator to lazily compute shortest paths for each node_chunk, and\nthen employs joblib's `Parallel` function to execute these computations in\nparallel across all available CPU cores.",
+                "additional_parameters": {
+                    'get_chunks : str, function (default = "chunks")': "A function that takes in an iterable of all the nodes as input and returns\nan iterable `node_chunks`. The default chunking is done by slicing the\n`G.nodes` into `n` chunks, where `n` is the number of CPU cores."
+                },
+            },
+            "johnson": {
+                "url": "https://github.com/networkx/nx-parallel/blob/main/nx_parallel/algorithms/shortest_paths/weighted.py#L59",
+                "additional_docs": "The parallel computation is implemented by dividing the\nnodes into chunks and computing the shortest paths using Johnson's Algorithm\nfor each chunk in parallel.",
+                "additional_parameters": {
+                    'get_chunks : str, function (default = "chunks")': "A function that takes in an iterable of all the nodes as input and returns\nan iterable `node_chunks`. The default chunking is done by slicing the\n`G.nodes` into `n` chunks, where `n` is the number of CPU cores."
+                },
+            },
+        },
     }
 
 
