@@ -23,6 +23,8 @@ jobs:
       - name: Commit modified files
         if: steps.check_changes.outputs.modified == 'true'
         run: |
+          git config --global user.email "1509aditi@gmail.com"
+          git config --global user.name "Aditi Juneja"
           git add .
           git commit -m "Update __init__.py"
           git push
