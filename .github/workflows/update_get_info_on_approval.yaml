@@ -18,7 +18,7 @@ jobs:
       - name: Check if __init__.py has been modified
         id: check_changes
         run: |
-          changes=$(git diff --color-words)
+          changes=$(git diff --color)
           echo "$changes"
           if [[ -n "$changes" ]]; then
             echo "modified=true" >> $GITHUB_ENV
