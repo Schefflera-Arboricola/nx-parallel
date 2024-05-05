@@ -1,4 +1,5 @@
 name: Update get_info on approval
+
 on:
   pull_request_review:
     types: [submitted]
@@ -17,11 +18,14 @@ jobs:
       - name: Check if __init__.py has been modified
         id: check_changes
         run: |
-          git diff --exit-code --name-only || echo "::set-output name=modified::true"
-        continue-on-error: true
+          changes=$(git diff)
+          echo "$changes"
+          if [[ -n "$changes" ]]; then
+            echo "modified=true" >> $GITHUB_ENV
+          fi
 
       - name: Commit modified files
-        if: steps.check_changes.outputs.modified == 'true'
+        if: env.modified == 'true'
         run: |
           git config --global user.email "1509aditi@gmail.com"
           git config --global user.name "Aditi Juneja"
