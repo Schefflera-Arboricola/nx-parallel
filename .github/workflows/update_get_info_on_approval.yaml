@@ -18,12 +18,10 @@ jobs:
       - name: Check if __init__.py has been modified
         id: check_changes
         run: |
-          changes=$(git diff --color)
-          echo "$changes"
-          if [[ -n "$changes" ]]; then
+          if git diff --exit-code --name-only; then
             echo "modified=true" >> $GITHUB_ENV
           fi
-
+  
       - name: Commit modified files
         if: env.modified == 'true'
         run: |
@@ -32,5 +30,6 @@ jobs:
           git add .
           pre-commit run --all-files
           git add .
+          echo $(git diff --color)
           git commit -m "Update __init__.py"
           git push origin ${{ github.head_ref }}
