@@ -18,7 +18,7 @@ jobs:
       - name: Check if __init__.py has been modified
         id: check_changes
         run: |
-          changes=$(git diff)
+          changes=$(git diff --color-words)
           echo "$changes"
           if [[ -n "$changes" ]]; then
             echo "modified=true" >> $GITHUB_ENV
@@ -29,6 +29,8 @@ jobs:
         run: |
           git config --global user.email "1509aditi@gmail.com"
           git config --global user.name "Aditi Juneja"
+          git add .
+          pre-commit run --all-files
           git add .
           git commit -m "Update __init__.py"
           git push origin ${{ github.head_ref }}
