@@ -1,0 +1,28 @@
+name: Update get_info on approval
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  approved:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Update __init__.py file
+        run: |
+          sh _nx_parallel/script.sh
+
+      - name: Check if __init__.py has been modified
+        id: check_changes
+        run: |
+          git diff --exit-code --name-only || echo "::set-output name=modified::true"
+        continue-on-error: true
+
+      - name: Commit modified files
+        if: steps.check_changes.outputs.modified == 'true'
+        run: |
+          git add .
+          git commit -m "Update __init__.py"
+          git push
