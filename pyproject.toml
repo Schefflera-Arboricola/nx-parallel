@@ -40,7 +40,7 @@ email = 'networkx-discuss@googlegroups.com'
 "Source Code" = 'https://github.com/networkx/nx-parallel'
 
 [project.entry-points."networkx.backends"]
-parallel = "nx_parallel.interface:BackendInterface"
+parallel = "nx_parallel.interface:backend_interface"
 
 [project.entry-points."networkx.backend_info"]
 parallel = "_nx_parallel:get_info"

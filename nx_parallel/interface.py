@@ -2,7 +2,7 @@ from operator import attrgetter
 import networkx as nx
 from nx_parallel import algorithms
 
-__all__ = ["BackendInterface", "ParallelGraph"]
+__all__ = ["BackendInterface", "ParallelGraph", "backend_interface"]
 
 
 ALGORITHMS = [
@@ -96,3 +96,6 @@ class BackendInterface:
         if isinstance(result, ParallelGraph):
             return result.graph_object
         return result
+
+
+backend_interface = BackendInterface()
