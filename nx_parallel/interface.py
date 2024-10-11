@@ -37,7 +37,7 @@ ALGORITHMS = [
     # Approximation
     "approximate_all_pairs_node_connectivity",
     # Connectivity
-    "connectivity.all_pairs_node_connectivity",
+    "all_pairs_node_connectivity",
 ]
 
 
